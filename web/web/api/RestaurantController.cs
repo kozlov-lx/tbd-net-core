@@ -6,6 +6,9 @@ namespace tbd.web.api
 
     public sealed class RestaurantController : ApiController
     {
+        /// <summary>
+        ///     Creates a restaurant.
+        /// </summary>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

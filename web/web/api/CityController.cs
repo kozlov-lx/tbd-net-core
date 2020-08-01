@@ -6,6 +6,10 @@ namespace tbd.web.api
 
     public sealed class CityController : ApiController
     {
+        /// <summary>
+        ///     Creates a city.
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -14,6 +18,10 @@ namespace tbd.web.api
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        ///     Retrieves a list of restaurants in the city.
+        /// </summary>
+        /// <param name="cityId">the id of the city</param>
         [HttpGet]
         [Route("{cityId}/restaurants")]
         [ProducesResponseType(StatusCodes.Status200OK)]
