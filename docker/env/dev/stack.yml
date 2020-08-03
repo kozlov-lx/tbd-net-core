@@ -1,0 +1,26 @@
+version: '3.5'
+
+services:
+  postgres:
+    image: postgres:12
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - tbd
+
+volumes:
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /var/app/tbd/postgres/data
+      o: bind
+
+networks:
+  tbd:
+    external: true
