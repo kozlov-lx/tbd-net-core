@@ -3,6 +3,7 @@ namespace tbd.web
     using System;
     using System.IO;
     using System.Reflection;
+    using database;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.ApplicationModels;
@@ -16,6 +17,8 @@ namespace tbd.web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<TbdDbContext>(TbdDbContext.Configure);
+
             services.AddControllers(options =>
             {
                 options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
