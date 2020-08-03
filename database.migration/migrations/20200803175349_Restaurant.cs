@@ -1,8 +1,8 @@
-﻿namespace database.migration.Migrations
-{
-    using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class City : Migration
+namespace database.migration.Migrations
+{
+    public partial class Restaurant : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,6 +11,7 @@
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+
         }
     }
 }
