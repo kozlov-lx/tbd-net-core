@@ -14,12 +14,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="migrations" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Remove="appsettings.json" />
       <Content Include="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="migrations\20200803153547_City.sql" />
+      <Content Include="migrations\20200803153547_City.sql">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
     </ItemGroup>

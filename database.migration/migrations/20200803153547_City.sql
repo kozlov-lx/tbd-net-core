@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS city
+(
+    city_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR NOT NULL
+);
+
+CREATE UNIQUE INDEX city__name__idx ON city (lower(name));
