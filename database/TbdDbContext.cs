@@ -13,6 +13,7 @@
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<City>();
+            modelBuilder.Entity<Restaurant>();
         }
 
         public static void Configure(DbContextOptionsBuilder options)

@@ -27,6 +27,7 @@ namespace tbd.web
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(options =>
             {
+                options.CustomSchemaIds(p => p.FullName);
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",

@@ -2,10 +2,10 @@ namespace tbd.web.api
 {
     using System.ComponentModel.DataAnnotations;
 
-    public sealed partial class CityController
+    public sealed partial class RestaurantController
     {
         /// <summary>
-        ///     A payload to create a new city.
+        ///     A payload to create a new restaurant.
         /// </summary>
         public sealed class CreateRequest
         {
@@ -14,6 +14,12 @@ namespace tbd.web.api
             /// </summary>
             [Required]
             public string Name { get; set; }
+
+            /// <summary>
+            ///     The id of the city.
+            /// </summary>
+            [Required]
+            public string City { get; set; }
         }
     }
 }

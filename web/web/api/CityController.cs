@@ -36,15 +36,9 @@ namespace tbd.web.api
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Create([FromBody] CreateRequest request)
         {
-            request.Name = request.Name?.Trim();
-            if (string.IsNullOrEmpty(request.Name))
-            {
-                return this.BadRequest("The name is empty");
-            }
-
             var city = new City
             {
-                Name = request.Name,
+                Name = request.Name?.Trim(),
             };
 
             this._dbContext.Set<City>().Add(city);
@@ -57,8 +51,14 @@ namespace tbd.web.api
                 var error = new TdbDbError(exception);
                 if (error.IsUniqueViolation())
                 {
-                    return this.BadRequest("The city already exists.");
+                    this.ModelState.AddModelError(
+                        nameof(CreateRequest.Name),
+                        "The city already exists."
+                    );
+                    return this.BadRequest(this.ModelState);
                 }
+
+                throw;
             }
 
             return new ObjectResult(new CreateResponse(city))
