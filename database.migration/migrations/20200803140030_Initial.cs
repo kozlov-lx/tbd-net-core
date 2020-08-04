@@ -1,4 +1,4 @@
-﻿namespace database.migration.Migrations
+﻿namespace tbd.database.migration.Migrations
 {
     using Microsoft.EntityFrameworkCore.Migrations;
 

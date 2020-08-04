@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using database.migration;
+using tbd.database.migration;
 
-namespace database.migration.Migrations
+namespace tbd.database.migration.Migrations
 {
     [DbContext(typeof(TbdDbContext))]
     [Migration("20200803140030_Initial")]

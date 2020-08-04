@@ -1,4 +1,4 @@
-﻿namespace database
+﻿namespace tbd.database
 {
     using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +7,12 @@
         public TbdDbContext(DbContextOptions<TbdDbContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<City>();
         }
 
         public static void Configure(DbContextOptionsBuilder options)

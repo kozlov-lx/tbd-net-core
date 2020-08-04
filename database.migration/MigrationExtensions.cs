@@ -1,4 +1,4 @@
-﻿namespace database.migration
+﻿namespace tbd.database.migration
 {
     using System;
     using System.IO;
@@ -13,7 +13,7 @@
             {
                 throw new ArgumentNullException(nameof(migration));
             }
-            
+
             MigrationAttribute attr = migration.GetType().GetCustomAttribute<MigrationAttribute>()
                 ?? throw new InvalidOperationException();
 

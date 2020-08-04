@@ -2,6 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <AssemblyName>tbd.database.migration</AssemblyName>
+        <RootNamespace>tbd.database.migration</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace database.migration.Migrations
+﻿namespace tbd.database.migration.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class Restaurant : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -11,7 +11,6 @@ namespace database.migration.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
         }
     }
 }
