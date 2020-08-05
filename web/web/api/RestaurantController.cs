@@ -23,8 +23,8 @@ namespace tbd.web.api
         ///     Sample request:
         ///     POST
         ///     {
-        ///     "name": "Restaurant",
-        ///     "city": "1"
+        ///         "name": "Restaurant",
+        ///         "city": "1"
         ///     }
         /// </remarks>
         /// <returns>The id of the newly created restaurant.</returns>
@@ -33,7 +33,7 @@ namespace tbd.web.api
         [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(CreateResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Create([FromBody] CreateRequest request)
         {

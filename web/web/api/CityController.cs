@@ -1,11 +1,12 @@
 namespace tbd.web.api
 {
-    using System;
+    using System.Linq;
     using System.Net;
     using database;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Newtonsoft.Json;
 
     public sealed partial class CityController : ApiController
     {
@@ -32,7 +33,7 @@ namespace tbd.web.api
         [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(CreateResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Create([FromBody] CreateRequest request)
         {
@@ -70,14 +71,79 @@ namespace tbd.web.api
         /// <summary>
         ///     Retrieves a list of restaurants in the city.
         /// </summary>
-        /// <param name="cityId">the id of the city</param>
+        /// <param name="city">the id of the city</param>
+        /// <param name="pageIndex">the index of the page (starts from 0)</param>
+        /// <param name="pageSize">the size of the page</param>
         [HttpGet]
-        [Route("{cityId}/restaurants")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [Route("{city}/restaurants")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(GetRestaurantsResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public void GetRestaurants(string cityId)
+        public IActionResult GetRestaurants(
+            string city,
+            [FromQuery] int? pageIndex,
+            [FromQuery] int? pageSize)
         {
-            throw new NotImplementedException();
+            int cityId;
+            try
+            {
+                cityId = JsonConvert.DeserializeObject<int>(city);
+            }
+            catch (JsonReaderException)
+            {
+                this.ModelState.AddModelError(
+                    nameof(city),
+                    "Invalid city id."
+                );
+                return this.BadRequest(this.ModelState);
+            }
+            
+            var response = new GetRestaurantsResponse
+            {
+                PageIndex = pageIndex ?? 0,
+                PageSize = pageSize ?? 25,
+            };
+
+            if (response.PageIndex < 0)
+            {
+                this.ModelState.AddModelError(
+                    nameof(pageIndex),
+                    "Invalid page index."
+                );
+                return this.BadRequest(this.ModelState);
+            }
+
+            if (response.PageSize <= 0)
+            {
+                this.ModelState.AddModelError(
+                    nameof(pageSize),
+                    "Invalid page size."
+                );
+                return this.BadRequest(this.ModelState);
+            }
+
+            const int maxPageSize = 100;
+            if (response.PageSize > maxPageSize)
+            {
+                this.ModelState.AddModelError(
+                    nameof(pageSize),
+                    "The max value of page size is 100."
+                );
+                return this.BadRequest(this.ModelState);
+            }
+
+            response.Restaurants = this._dbContext.Set<Restaurant>()
+                .Where(p => p.CityId == cityId)
+                .Skip(response.PageIndex * response.PageSize)
+                .Take(response.PageSize)
+                .Select(p => new CityRestaurant
+                {
+                    Id = JsonConvert.SerializeObject(p.Id),
+                    Name = p.Name,
+                }).ToList();
+
+            return this.Ok(response);
         }
     }
 }

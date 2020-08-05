@@ -1,5 +1,6 @@
 namespace tbd.web.api
 {
+    using System.ComponentModel.DataAnnotations;
     using database;
     using Newtonsoft.Json;
 
@@ -18,6 +19,7 @@ namespace tbd.web.api
             /// <summary>
             ///     The id of the city.
             /// </summary>
+            [Required]
             public string Id { get; set; }
         }
     }

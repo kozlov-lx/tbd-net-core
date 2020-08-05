@@ -1,12 +1,13 @@
 namespace tbd.web.api
 {
+    using System.ComponentModel.DataAnnotations;
     using database;
     using Newtonsoft.Json;
 
     public sealed partial class RestaurantController
     {
         /// <summary>
-        ///     A newly created city.
+        ///     A newly created restaurant.
         /// </summary>
         public sealed class CreateResponse
         {
@@ -16,8 +17,9 @@ namespace tbd.web.api
             }
 
             /// <summary>
-            ///     The id of the city.
+            ///     The id of the restaurant.
             /// </summary>
+            [Required]
             public string Id { get; set; }
         }
     }
